@@ -17,6 +17,7 @@
     <properties>
         <java.version>17</java.version>
         <primefaces-spring-boot-starter.version>5.3.4</primefaces-spring-boot-starter.version>
+        <primeflex.version>3.3.1</primeflex.version>
     </properties>
     <dependencies>
 
@@ -25,6 +26,11 @@
             <groupId>org.joinfaces</groupId>
             <artifactId>primefaces-spring-boot-starter</artifactId>
             <version>${primefaces-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>primeflex</artifactId>
+            <version>${primeflex.version}</version>
         </dependency>
         <!-- data persistence -->
         <dependency>

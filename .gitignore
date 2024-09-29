@@ -18,6 +18,9 @@ mvnw
 mvnw.cmd
 .mvn/
 
+### H2 ###
+h2/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
