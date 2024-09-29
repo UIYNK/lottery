@@ -30,12 +30,15 @@
         <h:outputText styleClass="text-5xl font-bold mb-8" value="#{eventState.currentEvent.title}"/>
         <div class="flex justify-between align-items-end gap-6 mb-8 grow-0">
             <div>
-                <p:outputLabel for="numberSpinner" value="تعداد قرعه"/>
-                <p:spinner id="numberSpinner" value="#{eventState.toBePicked}" min="1" decimalPlaces="0"
+                <p:outputLabel rendered="#{!eventState.finished}" for="numberSpinner" value="تعداد قرعه"/>
+                <p:outputLabel rendered="#{eventState.finished}" value="جایزه ها به اتمام رسید" styleClass="text-3xl"/>
+                <p:spinner id="numberSpinner" rendered="#{!eventState.finished}" value="#{eventState.toBePicked}"
+                           min="1" decimalPlaces="0"
                            dir="ltr" styleClass="mr-1"/>
             </div>
 
-            <p:commandButton type="submit" value="انتخاب شماره" action="#{eventState.pick()}" update="mainForm"
+            <p:commandButton type="submit" rendered="#{!eventState.finished}" value="انتخاب شماره"
+                             action="#{eventState.pick()}" update="mainForm"
                              styleClass="ui-button-raised"/>
 
             <p:commandButton value="از سر گیری" action="#{eventState.rest()}" update="mainForm"
@@ -50,9 +53,9 @@
         </div>
 
         <p:dataTable id="picks" var="lotteryPick" value="#{eventState.currentEventPicks}" rowIndexVar="index"
-                     emptyMessage=""
+                     emptyMessage="هنوز قرعه کشی انجام نشده است"
                      scrollable="true"
-                     scrollHeight="300"
+                     scrollHeight="400"
                      dir="rtl">
             <p:column headerText="ردیف" styleClass="w-fit">
                 <h:outputText value="#{index+1}" lang="fa"/>

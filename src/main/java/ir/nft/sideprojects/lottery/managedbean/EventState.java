@@ -30,7 +30,10 @@ public class EventState implements Serializable {
   private LotteryEvent currentEvent;
   private List<LotteryPrize> currentEventPrizes;
   private int toBePicked;
+  private int alreadyPicked;
+  private int remainingPicks;
   private List<LotteryPick> currentEventPicks;
+  private boolean isFinished;
 
   @Inject
   public EventState(
@@ -47,15 +50,33 @@ public class EventState implements Serializable {
     currentEvent =
         eventRepository.findById(1L).orElseThrow(() -> new RuntimeException("No event found"));
     currentEventPicks = pickRepository.findAllByOrderByCreatedAtDesc();
+    currentEventPrizes = currentEvent.getPrizes();
+    alreadyPicked = currentEventPicks.size();
+    remainingPicks = currentEventPrizes.size() - alreadyPicked;
+    isFinished = (remainingPicks < 1) || (alreadyPicked >= currentEvent.getTickets().size());
+    toBePicked = isFinished ? 0 : 1;
   }
 
   public void pick() {
+    if (toBePicked > remainingPicks) {
+      toBePicked = remainingPicks;
+    }
     lotteryService.pickTickets(toBePicked);
     currentEventPicks = pickRepository.findAllByOrderByCreatedAtDesc();
+    alreadyPicked = currentEventPicks.size();
+    remainingPicks = currentEvent.getPrizes().size() - alreadyPicked;
+    if (remainingPicks == 0 || (alreadyPicked >= currentEvent.getTickets().size())) {
+      toBePicked = 0;
+      isFinished = true;
+    }
   }
 
   public void rest() {
     lotteryService.resetPicks();
     currentEventPicks = pickRepository.findAllByOrderByCreatedAtDesc();
+    alreadyPicked = currentEventPicks.size();
+    remainingPicks = currentEvent.getPrizes().size() - alreadyPicked;
+    isFinished = (remainingPicks < 1) || (alreadyPicked >= currentEvent.getTickets().size());
+    toBePicked = isFinished ? 0 : 1;
   }
 }
