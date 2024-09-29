@@ -37,7 +37,7 @@ public class LotteryService {
 
         Query createPickQuery =
             entityManager.createNativeQuery(
-                "insert into LOTTERYPICKS(createdat, ticketid, prizeid) VALUES ( CURRENT_TIMESTAMP,(select  top 1 tk.ID from LOTTERYTICKETS tk left join LOTTERYPICKS pk on tk.ID=pk.TICKETID where pk.ID is null order by RAND()*RAND()),(select top 1 pr.ID from LOTTERYPRIZES pr left join LOTTERYPICKS pk on pr.ID=pk.PRIZEID where pk.ID is null order by RAND()*RAND()));");
+                "insert into LOTTERYPICKS(createdat, ticketid, prizeid) VALUES ( CURRENT_TIMESTAMP,(select  top 1 tk.ID from LOTTERYTICKETS tk left join LOTTERYPICKS pk on tk.ID=pk.TICKETID where pk.ID is null order by RAND()*RAND()),(select top 1 pr.ID from LOTTERYPRIZES pr left join LOTTERYPICKS pk on pr.ID=pk.PRIZEID where pk.ID is null order by ID asc ));");
         createPickQuery.executeUpdate();
       }
 
