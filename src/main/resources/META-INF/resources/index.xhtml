@@ -29,11 +29,12 @@
 
         <h:outputText styleClass="text-5xl font-bold mb-8" value="#{eventState.currentEvent.title}"/>
         <div class="flex justify-between align-items-end gap-6 mb-8 grow-0">
-            <div>
+            <div class="flex-grow-0">
                 <p:outputLabel rendered="#{!eventState.finished}" for="numberSpinner" value="تعداد قرعه"/>
                 <p:outputLabel rendered="#{eventState.finished}" value="جایزه ها به اتمام رسید" styleClass="text-3xl"/>
                 <p:spinner id="numberSpinner" rendered="#{!eventState.finished}" value="#{eventState.toBePicked}"
                            min="1" decimalPlaces="0"
+                           style="width: max-content"
                            dir="ltr" styleClass="mr-1"/>
             </div>
 
@@ -50,12 +51,19 @@
                 <p:commandButton value="انصراف" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
                 <p:commandButton value="تایید" type="button" styleClass="ui-confirmdialog-yes"/>
             </p:confirmDialog>
+
         </div>
+        <p:commandButton value="دانلود نتایج"
+                         styleClass="rounded-button ui-button-secondary align-self-end mb-4 text-sm"
+                         icon="pi pi-save">
+            <p:dataExporter type="xlsxstream" target="picks" fileName="picks"/>
+        </p:commandButton>
 
         <p:dataTable id="picks" var="lotteryPick" value="#{eventState.currentEventPicks}" rowIndexVar="index"
                      emptyMessage="هنوز قرعه کشی انجام نشده است"
                      scrollable="true"
                      scrollHeight="400"
+                     exportTag=""
                      dir="rtl">
             <p:column headerText="ردیف" styleClass="w-fit">
                 <h:outputText value="#{index+1}" lang="fa"/>
