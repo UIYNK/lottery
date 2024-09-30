@@ -17,11 +17,22 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "LotteryPrizes")
+@Table(
+    name = "LotteryPrizes",
+    uniqueConstraints = {
+      @UniqueConstraint(columnNames = {"Title", "EventID"}),
+      @UniqueConstraint(columnNames = {"Priority", "EventID"})
+    })
 public class LotteryPrize extends LotteryEntity {
 
   @Column(name = "Title", nullable = false)
   private String title;
+
+  @Column(name = "Number", nullable = false)
+  private int number;
+
+  @Column(name = "Priority", nullable = false)
+  private int priority;
 
   @Column(name = "Description")
   @Basic(fetch = FetchType.LAZY)

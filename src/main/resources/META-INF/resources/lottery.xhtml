@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      dir="rtl"
+      lang="fa">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>قرعه کشی</title>
+    <h:outputStylesheet library="css" name="styles/root-font-size.css"/>
+    <h:outputStylesheet library="css" name="primeIcons/primeicons.css"/>
+    <h:outputStylesheet library="css" name="fonts/vazir.css"/>
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+    <h:outputScript library="js" name="index.js"/>
+    <style>
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="flex justify-content-center align-items-center h-screen">
+        <h:form id="digitsForm">
+            <div class="flex flex-nowrap gap-3 justify-between">
+                <p:inputNumber id="digit1" decimalPlaces="0" minValue="1" maxValue="3"
+                               inputStyleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"
+                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl" lang="fa"/>
+                <p:inputNumber id="digit2" decimalPlaces="0" minValue="0" maxValue="9"
+                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
+                <p:inputNumber id="digit3" decimalPlaces="0" minValue="0" maxValue="9"
+                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
+                <p:inputNumber id="digit4" decimalPlaces="0" minValue="0" maxValue="9"
+                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
+                <p:inputNumber id="digit5" decimalPlaces="0" minValue="0" maxValue="9"
+                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
+            </div>
+
+            <p:commandButton value="Submit" update="@form"/>
+
+            <h:outputText style="margin-left: 20px;"/>
+        </h:form>
+    </div>
+
+</h:body>
+</html>

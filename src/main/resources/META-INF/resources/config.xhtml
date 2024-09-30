@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      dir="rtl"
+      lang="fa">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>قرعه کشی</title>
+    <h:outputStylesheet library="css" name="styles/root-font-size.css"/>
+    <h:outputStylesheet library="css" name="primeIcons/primeicons.css"/>
+    <h:outputStylesheet library="css" name="fonts/vazir.css"/>
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif !important;
+        }
+
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="flex justify-content-center pt-8">
+        <div class="inline-block flex flex-column justify-between align-items-center gap-4 p-8 shadow-4">
+            <h:outputText value="تنظیمات قرعه کشی" styleClass="text-4xl"/>
+            <h:form styleClass="align-self-start flex flex-column gap-2">
+                <h:outputText value="بازه سریالهای قرعه کشی:" styleClass="text-xl"/>
+                <div class="flex justify-between gap-5">
+                    <div class="flex align-items-center gap-2">
+                        <p:outputLabel for="from" value="از" styleClass="flex-grow-0"/>
+                        <p:spinner id="from" value="#{eventConfig.serialNumbersStart}"
+                                   min="1" decimalPlaces="0"
+                                   downButtonStyleClass="ui-button-success"
+                                   upButtonStyleClass="ui-button-success"
+                                   dir="rtl"/>
+                    </div>
+                    <div class="flex align-items-center gap-2">
+                        <p:outputLabel for="to" value="تا" styleClass=""/>
+                        <p:spinner id="to" value="#{eventConfig.serialNumbersEnd}"
+                                   min="1" decimalPlaces="0"
+                                   downButtonStyleClass="ui-button-success"
+                                   upButtonStyleClass="ui-button-success"
+                                   dir="rtl"/>
+                    </div>
+                </div>
+                <p:commandButton value="شروع برنامه" styleClass="align-self-end ui-button-info"
+                                 action="#{eventConfig.saveEventConfig()}"/>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

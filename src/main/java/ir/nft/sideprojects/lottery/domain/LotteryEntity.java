@@ -2,6 +2,7 @@ package ir.nft.sideprojects.lottery.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 
@@ -14,5 +15,6 @@ public abstract class LotteryEntity {
   protected long id;
 
   @Column(name = "CreatedAt", nullable = false)
+  @CreationTimestamp
   protected Instant createdAt;
 }

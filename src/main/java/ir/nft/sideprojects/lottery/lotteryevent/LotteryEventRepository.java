@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface LotteryEventRepository extends JpaRepository<LotteryEvent, Long> {
   @EntityGraph("LotteryEvent.withPrizes")
   Optional<LotteryEvent> findById(Long id);
+
+  LotteryEvent findFirstByOrderByIdAsc();
 }

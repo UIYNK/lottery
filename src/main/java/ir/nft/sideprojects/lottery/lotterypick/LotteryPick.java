@@ -23,6 +23,6 @@ public class LotteryPick extends LotteryEntity {
   private LotteryTicket ticket;
 
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "PrizeID", nullable = false, unique = true)
+  @JoinColumn(name = "PrizeID", nullable = false)
   private LotteryPrize prize;
 }
