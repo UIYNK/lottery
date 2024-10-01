@@ -8,9 +8,10 @@
 <h:head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>قرعه‌کشی</title>
+    <title>قرعه کشی</title>
+    <h:outputStylesheet library="css" name="styles/root-font-size.css"/>
     <h:outputStylesheet library="css" name="primeIcons/primeicons.css"/>
-    <h:outputStylesheet library="css" name="vazir.css"/>
+    <h:outputStylesheet library="css" name="fonts/vazir.css"/>
     <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
     <style>
         body {
@@ -20,21 +21,11 @@
         * {
             font-family: 'Vazirmatn', sans-serif;
         }
-
-        .bcg {
-            background-image: url("#{resource['img/landing.jpg']}");
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-            background-attachment: fixed;
-            background-blend-mode: color;
-        "
-        }
     </style>
 </h:head>
 <h:body>
-
-    <p:linkButton outcome="index" value="ورود به سامانه قرعه کشی" styleClass="mx-auto my-auto text-4xl"
-                  style="height: 25vh;"/>
+    <div class="flex justify-content-center align-items-center h-screen">
+        <p:linkButton value="ورود به سامانه قرعه کشی" outcome="lottery" styleClass="ui-button-info h-4rem"/>
+    </div>
 </h:body>
 </html>
