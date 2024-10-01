@@ -1,25 +1,15 @@
-INSERT INTO LotteryEvents (CreatedAt, Title, Description)
-VALUES (CURRENT_TIMESTAMP, 'قرعه‌کشی سال نو', 'رویداد ویژه سال نو');
+INSERT INTO LOTTERYEVENTS (CREATEDAT, DESCRIPTION, TITLE)
+VALUES (CURRENT_TIMESTAMP, 'رویداد ویژه هفته انتظامی', 'قرعه کشی راهپیمایی');
 
-INSERT INTO LotteryPrizes (CreatedAt, Title, Description, EventID)
-VALUES (CURRENT_TIMESTAMP, 'خودرو', 'پراید', 1);
-INSERT INTO LotteryPrizes (CreatedAt, Title, Description, EventID)
-VALUES (CURRENT_TIMESTAMP, 'لپ‌تاپ', 'مک بوک', 1);
-INSERT INTO LotteryPrizes (CreatedAt, Title, Description, EventID)
-VALUES (CURRENT_TIMESTAMP, 'گوشی هوشمند', 'سامسونگ', 1);
+INSERT INTO LotteryPrizes (CreatedAt, NUMBER, PRIORITY, Title, EventID)
+VALUES (CURRENT_TIMESTAMP, 1, 10, 'خودرو', 1);
 
+INSERT INTO LotteryPrizes (CreatedAt, NUMBER, PRIORITY, Title, EventID)
+VALUES (CURRENT_TIMESTAMP, 130, 9, 'دوچرخه', 1);
 
-INSERT INTO LotteryTickets (CreatedAt, SerialNumber, EventID)
-VALUES (CURRENT_TIMESTAMP, 'SN-001', 1);
-INSERT INTO LotteryTickets (CreatedAt, SerialNumber, EventID)
-VALUES (CURRENT_TIMESTAMP, 'SN-002', 1);
-INSERT INTO LotteryTickets (CreatedAt, SerialNumber, EventID)
-VALUES (CURRENT_TIMESTAMP, 'SN-003', 1);
+INSERT INTO LotteryPrizes (CreatedAt, NUMBER, PRIORITY, Title, EventID)
+VALUES (CURRENT_TIMESTAMP, 300, 8, 'بن خرید', 1);
 
 
-INSERT INTO LotteryPicks (CreatedAt, TicketID, PrizeID)
-VALUES (CURRENT_TIMESTAMP, 1, 1);
-INSERT INTO LotteryPicks (CreatedAt, TicketID, PrizeID)
-VALUES (CURRENT_TIMESTAMP, 2, 2);
-INSERT INTO LotteryPicks (CreatedAt, TicketID, PrizeID)
-VALUES (CURRENT_TIMESTAMP, 3, 3);
+INSERT INTO LotteryPrizes (CreatedAt, NUMBER, PRIORITY, Title, EventID)
+VALUES (CURRENT_TIMESTAMP, 80, 7, 'اقلام مصرفی', 1);

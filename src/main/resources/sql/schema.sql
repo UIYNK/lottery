@@ -1,36 +1,44 @@
 CREATE TABLE LotteryEvents
 (
-    ID          BIGINT AUTO_INCREMENT PRIMARY KEY,
-    CreatedAt   TIMESTAMP           NOT NULL,
-    Title       NVARCHAR(50) UNIQUE NOT NULL,
-    Description NVARCHAR(255)
+    ID          BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Title       VARCHAR(255) UNIQUE NOT NULL,
+    Description VARCHAR(255),
+    CreatedAt   TIMESTAMP           NOT NULL
 );
 
+-- Table: LotteryPrizes
 CREATE TABLE LotteryPrizes
 (
-    ID          BIGINT AUTO_INCREMENT PRIMARY KEY,
+    ID          BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Title       VARCHAR(255) NOT NULL,
+    Number      INT          NOT NULL,
+    Priority    INT          NOT NULL,
+    Description VARCHAR(255),
+    EventID     BIGINT       NOT NULL,
     CreatedAt   TIMESTAMP    NOT NULL,
-    Title       NVARCHAR(50) NOT NULL,
-    Description NVARCHAR(255),
-    EventID     BIGINT,
+    UNIQUE (Title, EventID),
+    UNIQUE (Priority, EventID),
     FOREIGN KEY (EventID) REFERENCES LotteryEvents (ID)
 );
 
+-- Table: LotteryTickets
 CREATE TABLE LotteryTickets
 (
-    ID           BIGINT AUTO_INCREMENT PRIMARY KEY,
-    CreatedAt    TIMESTAMP     NOT NULL,
-    SerialNumber BIGINT UNIQUE NOT NULL,
-    EventID      BIGINT,
+    ID           BIGINT PRIMARY KEY AUTO_INCREMENT,
+    SerialNumber BIGINT    NOT NULL UNIQUE,
+    EventID      BIGINT    NOT NULL,
+    CreatedAt    TIMESTAMP NOT NULL,
+    RandomIndex  UUID UNIQUE,
     FOREIGN KEY (EventID) REFERENCES LotteryEvents (ID)
 );
 
+-- Table: LotteryPicks
 CREATE TABLE LotteryPicks
 (
-    ID        BIGINT AUTO_INCREMENT PRIMARY KEY,
+    ID        BIGINT PRIMARY KEY AUTO_INCREMENT,
+    TicketID  BIGINT    NOT NULL UNIQUE,
+    PrizeID   BIGINT    NOT NULL,
     CreatedAt TIMESTAMP NOT NULL,
-    TicketID  BIGINT UNIQUE,
-    PrizeID   BIGINT UNIQUE,
     FOREIGN KEY (TicketID) REFERENCES LotteryTickets (ID),
     FOREIGN KEY (PrizeID) REFERENCES LotteryPrizes (ID)
 );

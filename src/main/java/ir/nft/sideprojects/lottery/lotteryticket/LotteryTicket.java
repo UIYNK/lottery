@@ -5,6 +5,8 @@ import ir.nft.sideprojects.lottery.lotteryevent.LotteryEvent;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @NamedEntityGraph(
     name = "whole-ticket",
@@ -19,6 +21,9 @@ public class LotteryTicket extends LotteryEntity {
 
   @Column(name = "SerialNumber", nullable = false, unique = true)
   private Long serialNumber;
+
+  @Column(name = "RandomIndex", unique = true)
+  private UUID randomIndex;
 
   @JoinColumn(name = "EventID", nullable = false)
   @ManyToOne(fetch = FetchType.LAZY)

@@ -24,10 +24,10 @@
     </style>
 </h:head>
 <h:body>
-    <div class="flex justify-content-center pt-8">
-        <div class="inline-block flex flex-column justify-between align-items-center gap-4 p-8 shadow-4">
+    <div class="flex justify-content-center">
+        <div class="inline-block flex flex-column justify-between align-items-center gap-4 p-8 shadow-4 pt-8">
             <h:outputText value="تنظیمات قرعه کشی" styleClass="text-4xl"/>
-            <h:form styleClass="align-self-start flex flex-column gap-2">
+            <h:form styleClass="align-self-start flex flex-column gap-6">
                 <h:outputText value="بازه سریالهای قرعه کشی:" styleClass="text-xl"/>
                 <div class="flex justify-between gap-5">
                     <div class="flex align-items-center gap-2">
@@ -47,8 +47,12 @@
                                    dir="rtl"/>
                     </div>
                 </div>
-                <p:commandButton value="شروع برنامه" styleClass="align-self-end ui-button-info"
-                                 action="#{eventConfig.saveEventConfig()}"/>
+                <div class="flex gap-3 align-self-end">
+                    <p:commandButton value="باز نشانی برنده ها" styleClass="ui-button-danger"
+                                     action="#{eventConfig.clearPicks()}"/>
+                    <p:commandButton value="تولید شماره سریالها" styleClass="ui-button-info"
+                                     action="#{eventConfig.saveEventConfig()}"/>
+                </div>
             </h:form>
         </div>
     </div>

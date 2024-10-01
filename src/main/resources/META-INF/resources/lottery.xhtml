@@ -21,25 +21,60 @@
     </style>
 </h:head>
 <h:body>
-    <div class="flex justify-content-center align-items-center h-screen">
+    <div class="flex justify-content-center align-items-center">
         <h:form id="digitsForm">
-            <div class="flex flex-nowrap gap-3 justify-between">
-                <p:inputNumber id="digit1" decimalPlaces="0" minValue="1" maxValue="3"
-                               inputStyleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"
-                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl" lang="fa"/>
-                <p:inputNumber id="digit2" decimalPlaces="0" minValue="0" maxValue="9"
-                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
-                <p:inputNumber id="digit3" decimalPlaces="0" minValue="0" maxValue="9"
-                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
-                <p:inputNumber id="digit4" decimalPlaces="0" minValue="0" maxValue="9"
-                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
-                <p:inputNumber id="digit5" decimalPlaces="0" minValue="0" maxValue="9"
-                               styleClass="w-3rem h-3rem border-circle shadow-1 text-center text-4xl"/>
+            <div class="flex flex-column align-items-center gap-6">
+                <div class="flex flex-column gap-3">
+                    <div class="flex flex-nowrap gap-3 justify-between" dir="ltr">
+                        <p:inputNumber id="digit1" decimalPlaces="0" minValue="0" maxValue="9"
+                                       value="#{lotteryView.individualNumber[4]}"
+                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                        <p:inputNumber id="digit2" decimalPlaces="0" minValue="0" maxValue="9"
+                                       value="#{lotteryView.individualNumber[3]}"
+                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                        <p:inputNumber id="digit3" decimalPlaces="0" minValue="0" maxValue="9"
+                                       value="#{lotteryView.individualNumber[2]}"
+                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                        <p:inputNumber id="digit4" decimalPlaces="0" minValue="0" maxValue="9"
+                                       value="#{lotteryView.individualNumber[1]}"
+                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                        <p:inputNumber id="digit5" decimalPlaces="0" minValue="0" maxValue="9"
+                                       value="#{lotteryView.individualNumber[0]}"
+                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                    </div>
+                    <p:commandButton value="انتخاب برنده" styleClass="h-4rem ui-button-success"
+                                     action="#{lotteryView.pickIndividualSerialNumber()}" update="picks"/>
+                    <p:commandButton value="انجام خودکار ادامه قرعه کشی" styleClass="h-4rem ui-button-warning"
+                                     action="#{lotteryView.autoPickRemainingPrizes()}" update="picks"/>
+                </div>
+                <div class="flex flex-column gap-1">
+                    <p:commandButton value="دانلود نتایج"
+                                     styleClass="rounded-button ui-button-secondary align-self-end"
+                                     style="font-size: 0.7rem !important;"
+                                     icon="pi pi-save">
+                        <p:dataExporter type="xlsxstream" target="picks" fileName="picks"/>
+                    </p:commandButton>
+                    <p:dataTable id="picks" var="lotteryPick" value="#{lotteryView.currentPicks}" rowIndexVar="index"
+                                 emptyMessage="هنوز قرعه کشی انجام نشده است"
+                                 scrollable="true"
+                                 scrollHeight="300"
+                                 style="max-width: 48rem !important;"
+                                 dir="rtl">
+                        <p:column headerText="ردیف" styleClass="w-fit">
+                            <h:outputText value="#{index+1}" lang="fa"/>
+                        </p:column>
+
+                        <p:column headerText="سریال قرعه کشی">
+                            <h:outputText value="#{lotteryPick.ticket.serialNumber}"/>
+                        </p:column>
+
+                        <p:column headerText="جایزه">
+                            <h:outputText value="#{lotteryPick.prize.title}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
             </div>
 
-            <p:commandButton value="Submit" update="@form"/>
-
-            <h:outputText style="margin-left: 20px;"/>
         </h:form>
     </div>
 

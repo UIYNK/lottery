@@ -4,6 +4,7 @@ import ir.nft.sideprojects.lottery.lotteryevent.LotteryEvent;
 import ir.nft.sideprojects.lottery.lotteryevent.LotteryEventRepository;
 import ir.nft.sideprojects.lottery.lotteryticket.LotteryTicket;
 import ir.nft.sideprojects.lottery.lotteryticket.LotteryTicketRepository;
+import ir.nft.sideprojects.lottery.service.LotteryService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -13,6 +14,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Named("eventConfig")
 @ViewScoped
@@ -21,6 +23,7 @@ import java.util.List;
 public class EventConfig {
   private final LotteryTicketRepository ticketRepository;
   private final LotteryEventRepository eventRepository;
+  private final LotteryService lotteryService;
 
   private LotteryEvent currentEvent;
   private int serialNumbersStart;
@@ -28,9 +31,12 @@ public class EventConfig {
 
   @Inject
   public EventConfig(
-      LotteryTicketRepository ticketRepository, LotteryEventRepository eventRepository) {
+      LotteryTicketRepository ticketRepository,
+      LotteryEventRepository eventRepository,
+      LotteryService lotteryService) {
     this.ticketRepository = ticketRepository;
     this.eventRepository = eventRepository;
+    this.lotteryService = lotteryService;
   }
 
   @PostConstruct
@@ -39,10 +45,19 @@ public class EventConfig {
     currentEvent = eventRepository.findFirstByOrderByIdAsc();
   }
 
+  public void clearPicks() {
+    lotteryService.clearPicks(currentEvent.getId());
+  }
+
   public void saveEventConfig() {
     List<LotteryTicket> tickets = new ArrayList<>();
     for (long i = serialNumbersStart; i <= serialNumbersEnd; i++) {
-      tickets.add(LotteryTicket.builder().event(currentEvent).serialNumber(i).build());
+      tickets.add(
+          LotteryTicket.builder()
+              .event(currentEvent)
+              .serialNumber(i)
+              .randomIndex(UUID.randomUUID())
+              .build());
     }
     ticketRepository.saveAll(tickets);
   }
