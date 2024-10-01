@@ -14,6 +14,7 @@ public interface LotteryPickRepository extends JpaRepository<LotteryPick, Long> 
 
   Optional<LotteryPick> findByTicket_SerialNumber(long serialNumber);
 
+  @EntityGraph("LotteryPick.withTicketAndPrize")
   List<LotteryPick> findAllByOrderByIdDesc();
 
   void deleteAllByTicket_Event_Id(long eventId);

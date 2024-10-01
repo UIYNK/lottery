@@ -16,16 +16,29 @@
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif !important;
+            background-image: url("#{resource['img/landing.jpg']}");
+            margin: 0;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
         }
 
         * {
             font-family: 'Vazirmatn', sans-serif;
         }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 </h:head>
 <h:body>
     <div class="flex justify-content-center align-items-center h-screen">
-        <p:linkButton value="ورود به سامانه قرعه کشی" outcome="lottery" styleClass="ui-button-info h-4rem"/>
+        <div class="pt-8 flex flex-column gap-8">
+            <div></div>
+            <p:linkButton value="ورود به سامانه قرعه کشی" outcome="lottery"
+                          styleClass="ui-button-warning
+                           text-4xl h-4rem"/>
+        </div>
     </div>
 </h:body>
 </html>
