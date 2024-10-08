@@ -1,0 +1,17 @@
+.p-16 {
+    padding: 16px;
+}
+
+.btn-styles {
+    width: 44%;
+    margin-right: 3% !important;
+    margin-left: 3% !important;
+}
+
+.numbers-background {
+    background: radial-gradient(#689f38, transparent);
+}
+
+.body-background {
+    background: linear-gradient(185deg, #0036611c, transparent);
+}

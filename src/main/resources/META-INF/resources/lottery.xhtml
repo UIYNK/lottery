@@ -13,6 +13,7 @@
     <h:outputStylesheet library="css" name="primeIcons/primeicons.css"/>
     <h:outputStylesheet library="css" name="fonts/vazir.css"/>
     <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+    <h:outputStylesheet library="css" name="styles/style.css"/>
     <h:outputScript library="js" name="index.js"/>
     <style>
         * {
@@ -21,31 +22,34 @@
     </style>
 </h:head>
 <h:body>
-    <div class="flex justify-content-center align-items-center">
+    <div class="flex justify-content-center align-items-center body-background">
         <h:form id="digitsForm">
             <div class="flex flex-column align-items-center gap-6">
                 <div class="flex flex-column gap-3">
-                    <div class="flex flex-nowrap gap-3 justify-between" dir="ltr">
+                    <div class="flex flex-nowrap gap-3 justify-between p-16 numbers-background" dir="ltr">
                         <p:inputNumber id="digit1" decimalPlaces="0" minValue="0" maxValue="9"
-                                       value="#{lotteryView.individualNumber[4]}"
-                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                                       value="#{lotteryView.individualNumber[4]}" keydown="focusNextInput($event)"
+                                       inputStyleClass="w-8rem h-8rem p-3 border-circle shadow-1 text-center text-7xl"/>
                         <p:inputNumber id="digit2" decimalPlaces="0" minValue="0" maxValue="9"
                                        value="#{lotteryView.individualNumber[3]}"
-                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                                       inputStyleClass="w-8rem h-8rem p-3 border-circle shadow-1 text-center text-7xl"/>
                         <p:inputNumber id="digit3" decimalPlaces="0" minValue="0" maxValue="9"
                                        value="#{lotteryView.individualNumber[2]}"
-                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                                       inputStyleClass="w-8rem h-8rem p-3 border-circle shadow-1 text-center text-7xl"/>
                         <p:inputNumber id="digit4" decimalPlaces="0" minValue="0" maxValue="9"
                                        value="#{lotteryView.individualNumber[1]}"
-                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                                       inputStyleClass="w-8rem h-8rem p-3 border-circle shadow-1 text-center text-7xl"/>
                         <p:inputNumber id="digit5" decimalPlaces="0" minValue="0" maxValue="9"
                                        value="#{lotteryView.individualNumber[0]}"
-                                       inputStyleClass="w-4rem h-4rem p-3 border-circle shadow-1 text-center text-4xl"/>
+                                       inputStyleClass="w-8rem h-8rem p-3 border-circle shadow-1 text-center text-7xl"/>
                     </div>
-                    <p:commandButton value="انتخاب برنده" styleClass="h-4rem ui-button-success"
-                                     action="#{lotteryView.pickIndividualSerialNumber()}" update="picks"/>
-                    <p:commandButton value="انجام خودکار ادامه قرعه کشی" styleClass="h-4rem ui-button-warning"
-                                     action="#{lotteryView.autoPickRemainingPrizes()}" update="picks"/>
+                    <div class="flex flex-nowrap ">
+                        <p:commandButton value="انتخاب برنده" styleClass="h-4rem ui-button-success btn-styles"
+                                         action="#{lotteryView.pickIndividualSerialNumber()}" update="picks"/>
+                        <p:commandButton value="انجام خودکار ادامه قرعه کشی"
+                                         styleClass="h-4rem ui-button-warning btn-styles"
+                                         action="#{lotteryView.autoPickRemainingPrizes()}" update="picks"/>
+                    </div>
                 </div>
                 <div class="flex flex-column gap-1">
                     <p:commandButton value="دانلود نتایج"
